@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapp-releasemanager
+  namespace: open-cluster-management-gitops
+spec:
+  generators:
+  - list:
+      elements:
+      - environment: dev
+        appName: hpa-example
+        appNamespace: hpa-example-dev
+        repoURL: https://github.com/brian-jarvis/hpa-example.git
+        path: manifests
+        revision: master
+
+      - environment: dev
+        appName: moyo-spring
+        appNamespace: simple-metrics-test
+        repoURL: https://github.com/MoOyeg/simple-spring-openshift-metrics-example.git
+        path: deploy
+        revision: main

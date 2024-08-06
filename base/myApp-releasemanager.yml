@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapp-releasemanager
+  namespace: open-cluster-management-gitops
+spec:
+  template:
+    metadata:
+      name: '{{appName}}-{{environment}}'
+    spec:
+      project: default
+      source:
+        repoURL: '{{repoURL}}'
+        targetRevision: '{{revision}}'
+        path: '{{path}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{appNamespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          allowEmpty: true
+          selfHeal: false
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true
+          - Validate=false
