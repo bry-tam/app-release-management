@@ -2,11 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: myapp-releasemanager
-  namespace: open-cluster-management-gitops
+  namespace: argocd-dev
 spec:
   template:
     metadata:
       name: '{{appName}}-{{environment}}'
+      namespace: argocd-dev
     spec:
       project: default
       source:
