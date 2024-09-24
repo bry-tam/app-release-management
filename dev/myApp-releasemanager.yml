@@ -2,21 +2,42 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: myapp-releasemanager
-  namespace: argocd-dev
+  namespace: openshift-gitops
 spec:
   generators:
   - list:
       elements:
       - environment: dev
-        appName: hpa-example
-        appNamespace: hpa-example-dev
-        repoURL: https://github.com/brian-jarvis/hpa-example.git
-        path: manifests
-        revision: master
+        appName: bookinfo
+        appNamespace: bookinfo-dev
+        repoURL: https://github.com/bry-tam/app-sample-rollout.git
+        path: bookinfo/environments/dev
+        revision: bookinfo-v1
 
       - environment: dev
-        appName: moyo-spring
-        appNamespace: simple-metrics-test
-        repoURL: https://github.com/MoOyeg/simple-spring-openshift-metrics-example.git
-        path: deploy
-        revision: main
+        appName: bookinfo-details
+        appNamespace: bookinfo-dev
+        repoURL: https://github.com/bry-tam/app-sample-rollout.git
+        path: details/environments/dev
+        revision: bookinfo-v1
+
+      - environment: dev
+        appName: bookinfo-productpage
+        appNamespace: bookinfo-dev
+        repoURL: https://github.com/bry-tam/app-sample-rollout.git
+        path: productpage/environments/dev
+        revision: bookinfo-v1
+
+      - environment: dev
+        appName: bookinfo-ratings
+        appNamespace: bookinfo-dev
+        repoURL: https://github.com/bry-tam/app-sample-rollout.git
+        path: ratings/environments/dev
+        revision: bookinfo-v1
+
+      - environment: dev
+        appName: bookinfo-reviews
+        appNamespace: bookinfo-dev
+        repoURL: https://github.com/bry-tam/app-sample-rollout.git
+        path: reviews/environments/dev
+        revision: bookinfo-v1
